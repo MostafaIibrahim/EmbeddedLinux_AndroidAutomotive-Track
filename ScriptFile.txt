@@ -1,0 +1,31 @@
+1- Ubutu distribution , RedHat , Manjaro
+
+
+2- man command provide short reference manuals for individual commands,API function,concepts, configuration file syntax, file format and is organized in sections 
+
+
+3- rmdir ---> remove empty directories , rm --> remove files or directories if it was attached wiht flag -r so it deletes the entire directory and files in this directory
+
+
+4 - a- Failed to remove because directory is not empty , we used command rm -r.
+    b- rmdir: failed to remove 'OldFiles': Not a directory, Nothing will happen to the hierarchy
+    c- The absolute --> /home/mostafa/docs/mycv
+       The relative --> current relative address so if I was at home it will be -->/docs/mycv
+
+5-cp /etc/passwd  ~/mypasswd
+
+6-mv mypasswd oldpasswd
+
+7- 1- cd ~  , 2- cd , 3- cd $HOME , 4- cd -
+
+8- ls w* --> wall, watch,watchgnupg,wc,..etc
+
+9- Display information about command type
+
+10- cmp , chacl
+
+11- 
+
+12-search for a keyword using a regular expression
+
+ 13-
