@@ -1,0 +1,3 @@
+User enter Size of strings (No of strings)
+Fill in strings 
+
