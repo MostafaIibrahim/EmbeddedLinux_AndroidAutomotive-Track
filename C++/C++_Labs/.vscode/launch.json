@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "cwd": "/home/mostafa/Desktop/ITI_Docs/AdminLinux_Lab/Embedded-LinuxI/C++/C++_Labs/05Lab_DynamicAlloc",
+      "program": "/home/mostafa/Desktop/ITI_Docs/AdminLinux_Lab/Embedded-LinuxI/C++/C++_Labs/05Lab_DynamicAlloc/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
