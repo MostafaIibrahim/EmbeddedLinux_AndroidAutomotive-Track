@@ -16,7 +16,7 @@ class DynamicArray{
     }
     public:
 
-    DynamicArray():currentSize{0},capVec{1}{
+    DynamicArray():currentSize{0},capVec{0}{
         arrvec = new int[capVec];
     }
     /*constructor with given capacity*/
@@ -51,20 +51,20 @@ class DynamicArray{
         if(capVec >= currentSize){
             resize();
         }
-        arrvec[capVec] = val;
-        capVec++;
+        arrvec[capVec++] = val;
     }
     /*- remove the last element from the array*/
     int popBack(){
-        int result = arrvec[capVec];
-        capVec--;
+        int result = arrvec[--capVec];
         return result;
     }
     /*- remove the element at the given index*/
-    void removeAt(int index){
+    int removeAt(int index){
+        int result = arrvec[index];
         for(int i = index ; i < capVec ; i++)
             arrvec[i] = arrvec[i+1];
         capVec--;
+        return result ;
     }
     /*- insert the value at the given index and shift the elements to the right*/
     void insertAt(int index,int value){
@@ -104,12 +104,22 @@ class DynamicArray{
 
 
 int main (){
-    DynamicArray arr;
+   /* DynamicArray arr;
     arr.pushBack(10);
     arr.pushBack(20);
     arr.pushBack(30);
     arr.pushBack(40);
     arr.print();
-    std::cout << "PoP" << arr.popBack() << std::endl;
+    std::cout << "PoP Value = " << arr.popBack() << std::endl;
     arr.print();
+    arr.insertAt(2,60);
+    arr.print();
+    std::cout << "Size = " <<  arr.getSize() << std::endl;
+    std::cout << "rmv at = " <<  arr.removeAt(2)<< std::endl;
+    arr.print();*/
+    DynamicArray arr1(5 , new int[5]{1,2,3,4,5});
+    arr1.print();
+    arr1.pushBack(10);
+    arr1.insertAt(2,60);
+    arr1.print();
 }
