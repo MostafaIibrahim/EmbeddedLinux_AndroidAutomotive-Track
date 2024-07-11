@@ -1,0 +1,3 @@
+-When executing it with sudo permission it moved the binary output to system path which is, PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+So "out" become inder system path, and when we write out to terminal it creates a shell process which will search for out command in system path and when "out" is found, it creates a process to it and it's executed
