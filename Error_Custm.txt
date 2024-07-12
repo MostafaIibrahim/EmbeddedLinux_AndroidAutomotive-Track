@@ -1,0 +1,60 @@
+[ALL  ]    /usr/bin/ld: lto-compress.o: in function `lto_uncompression_zstd':
+[ALL  ]    /workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/lto-compress.cc:168: undefined reference to `ZSTD_decompress'
+[ALL  ]    /usr/bin/ld: /workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/lto-compress.cc:170: undefined reference to `ZSTD_isError'
+[ALL  ]    /usr/bin/ld: /workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/lto-compress.cc:171: undefined reference to `ZSTD_getErrorName'
+[ALL  ]    /usr/bin/ld: lto-compress.o: in function `lto_end_compression(lto_compression_stream*)':
+[ALL  ]    /workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/lto-compress.cc:135: undefined reference to `ZSTD_compressBound'
+[ALL  ]    /usr/bin/ld: lto-compress.o: in function `lto_compression_zstd':
+[ALL  ]    /workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/lto-compress.cc:138: undefined reference to `ZSTD_compress'
+[ALL  ]    /usr/bin/ld: /workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/lto-compress.cc:141: undefined reference to `ZSTD_isError'
+[ALL  ]    /usr/bin/ld: lto-compress.o: in function `lto_end_compression(lto_compression_stream*)':
+[ALL  ]    /workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/lto-compress.cc:120: undefined reference to `ZSTD_maxCLevel'
+[ALL  ]    /usr/bin/ld: lto-compress.o: in function `lto_normalized_zstd_level':
+[ALL  ]    /workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/lto-compress.cc:121: undefined reference to `ZSTD_maxCLevel'
+[ALL  ]    /usr/bin/ld: lto-compress.o: in function `lto_compression_zstd':
+[ALL  ]    /workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/lto-compress.cc:142: undefined reference to `ZSTD_getErrorName'
+[ALL  ]    /usr/bin/ld: lto-compress.o: in function `lto_end_uncompression(lto_compression_stream*, lto_compression)':
+[ALL  ]    /workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/lto-compress.cc:161: undefined reference to `ZSTD_getFrameContentSize'
+[ALL  ]    /usr/bin/ld: lto-compress.o: in function `lto_uncompression_zstd':
+[ALL  ]    /workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/lto-compress.cc:168: undefined reference to `ZSTD_decompress'
+[ALL  ]    /usr/bin/ld: /workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/lto-compress.cc:170: undefined reference to `ZSTD_isError'
+[ALL  ]    /usr/bin/ld: /workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/lto-compress.cc:171: undefined reference to `ZSTD_getErrorName'
+[ERROR]    collect2: error: ld returned 1 exit status
+[ERROR]    make[2]: *** [/workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/lto/Make-lang.in:96: lto1] Error 1
+[ERROR]    make[2]: *** Waiting for unfinished jobs....
+[ERROR]    collect2: error: ld returned 1 exit status
+[ERROR]    make[2]: *** [/workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/lto/Make-lang.in:102: lto-dump] Error 1
+[ERROR]    collect2: error: ld returned 1 exit status
+[ERROR]    make[2]: *** [/workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/src/gcc/gcc/c/Make-lang.in:87: cc1] Error 1
+[ALL  ]    rm gcc.pod
+[ALL  ]    make[2]: Leaving directory '/workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/build/build-cc-gcc-core/gcc'
+[ERROR]    make[1]: *** [Makefile:4594: all-gcc] Error 2
+[ALL  ]    make[1]: Leaving directory '/workspaces/Embedded-LinuxI/crosstool-ng/.build/arm-cortexa9_neon-linux-musleabihf/build/build-cc-gcc-core'
+[ERROR]  
+[ERROR]  >>
+[ERROR]  >>  Build failed in step 'Installing core C gcc compiler'
+[ERROR]  >>        called in step '(top-level)'
+[ERROR]  >>
+[ERROR]  >>  Error happened in: CT_DoExecLog[scripts/functions@378]
+[ERROR]  >>        called from: do_gcc_core_backend[scripts/build/cc/gcc.sh@727]
+[ERROR]  >>        called from: do_cc_core[scripts/build/cc/gcc.sh@212]
+[ERROR]  >>        called from: main[scripts/crosstool-NG.sh@710]
+[ERROR]  >>
+[ERROR]  >>  For more info on this error, look at the file: 'build.log'
+[ERROR]  >>  There is a list of known issues, some with workarounds, in:
+[ERROR]  >>      https://crosstool-ng.github.io/docs/known-issues/
+[ERROR]  >>
+[ERROR]  >> NOTE: Your configuration includes features marked EXPERIMENTAL.
+[ERROR]  >> Before submitting a bug report, try to reproduce it without enabling
+[ERROR]  >> any experimental features. Otherwise, you'll need to debug it
+[ERROR]  >> and present an explanation why it is a bug in crosstool-NG - or
+[ERROR]  >> preferably, a fix.
+[ERROR]  >>
+[ERROR]  >>  If you feel this is a bug in crosstool-NG, report it at:
+[ERROR]  >>      https://github.com/crosstool-ng/crosstool-ng/issues/
+[ERROR]  >>
+[ERROR]  >>  Make sure your report includes all the information pertinent to this issue.
+[ERROR]  >>  Read the bug reporting guidelines here:
+[ERROR]  >>      http://crosstool-ng.github.io/support/
+[ERROR]  
+[ERROR]  (elapsed: 18:47.25)
