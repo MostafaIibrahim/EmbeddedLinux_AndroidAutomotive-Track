@@ -1,0 +1,5 @@
+Algorithms:
+	until Merge sorting and quick sorting
+
+Data sructure:
+	until Hash-table - we can neglect Graph

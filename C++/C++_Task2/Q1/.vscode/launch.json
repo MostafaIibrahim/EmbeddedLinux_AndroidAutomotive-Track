@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/mostafa/Desktop/ITI_Docs/AdminLinux_Lab/Embedded-LinuxI/C++/C++_Task02/C++_Q1",
-      "program": "/home/mostafa/Desktop/ITI_Docs/AdminLinux_Lab/Embedded-LinuxI/C++/C++_Task02/C++_Q1/build/Debug/outDebug",
+      "cwd": "/home/mostafa/Desktop/ITI_Docs/AdminLinux_Lab/Embedded-LinuxI/C++/C++_Task2/Q1",
+      "program": "/home/mostafa/Desktop/ITI_Docs/AdminLinux_Lab/Embedded-LinuxI/C++/C++_Task2/Q1/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

@@ -5,7 +5,7 @@ Implement a class for a dynamic array (Vector)
         * pushback(value) - add the value to the end of the array
         * popback() - remove the last element from the array
         * removeAt(index) - remove the element at the given index
-        * insertAt(index, value) - insert the value at the given index and shift the elements to the right
+        *  - insert the value at the given index and shift the elements to the right
         * insertMiddle(value) - insert the value in the middle of the array
         * removeMiddle() - remove the middle element from the array
         * size() - return the size of the array
@@ -24,4 +24,5 @@ Implement a class for a dynamic array (Vector)
         * array - pointer to the array
         * capacity - capacity of the array
         * currentSize - current size of the array 
+        
         
