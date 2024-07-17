@@ -2,17 +2,11 @@
 
 This is the Battleship game implementation.
 
-![Battleship Board](./Battle.jpeg)
-
-# Battleship Game
-
-This is the Battleship game implementation.
-
 ## Game Board
 
 Here's an example of the game board:
 
-![Battleship Board](images/battleship_board.png)
+![Battleship Board](./Battle.jpeg)
 
 ## How to Play
 
@@ -31,6 +25,6 @@ Compile and run the game with the following commands:
 ```bash
 g++ -o battleship main.cpp
 ./battleship
-
+```
 ### The expected output 
 ![Battleship Board](./Result_Battleship.png)
