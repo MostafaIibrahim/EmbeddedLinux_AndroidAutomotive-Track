@@ -1,6 +1,6 @@
 # Android Automotive Track 
 
-! [ITI](./iti_logo.5b9a0fd125be-300x133.png)
+![ITI](./iti_logo.5b9a0fd125be-300x133.png)
 
 This Repo is part of ITI track which includes: 
 - C++ --> Tasks + Labs + project
