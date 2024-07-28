@@ -1,4 +1,4 @@
-# Task2 --> Booting from initrmfs
+# Task2 --> Booting from Sd Card
 
 ```bash 
 cd ~/rootfs
