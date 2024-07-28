@@ -24,7 +24,7 @@ chmod +x rcS
 ``` bash 
 rsync -av ~/busybox/_install/* ~/rootfs
 ```
-! [Copying_Install](./initramfs.png)
+![Copying_Install](./initramfs.png)
 
 - Now let's create the inittab file which will be read by the init program
 
@@ -32,7 +32,7 @@ rsync -av ~/busybox/_install/* ~/rootfs
 sudo vim ./etc/inittab
 ```
 ### Here is File system after stageing 
-! [Hierarchy] (./fstree.png)
+![Hierarchy] (./fstree.png)
 
 - Now let's exam the permission 
 ``` bash 
@@ -58,5 +58,5 @@ fatload mmc 0:1 ${fdt_addr_r} vexpress-v2p-ca9.dtb
 edit: console=tty0 console=ttyAMA0,38400n8 root=/dev/mmcblk0p2 rootfstype=ext4 rw  rootwait init=/sbin/init 
 bootz ${kernel_addr_r} - ${fdt_addr_r} 
 ```
-! [boot_kernel_sd] (./bootkernelsd.png)
+![boot_kernel_sd] (./bootkernelsd.png)
 
