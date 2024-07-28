@@ -58,5 +58,5 @@ fatload mmc 0:1 ${fdt_addr_r} vexpress-v2p-ca9.dtb
 edit: console=tty0 console=ttyAMA0,38400n8 root=/dev/mmcblk0p2 rootfstype=ext4 rw  rootwait init=/sbin/init 
 bootz ${kernel_addr_r} - ${fdt_addr_r} 
 ```
-![boot_kernel_sd] (./bootkernelsd.png)
+![boot_kernel_sd](./bootkernelsd.png)
 
