@@ -22,11 +22,10 @@ class Spinlock{
             flag.clear(std::memory_order_relaxed);
         }
 };
-std::atomic<int> shared_variable(1.0);
 
 // Create a SpinLock instance
 Spinlock spin_lock;
-void multiply() {
+void multiply(std::atomic<int>  &shared_variable) {
     for (int i = 0; i < 10; ++i) { // Number of operations
         spin_lock.lock();
         shared_variable =shared_variable * 2;
@@ -36,7 +35,7 @@ void multiply() {
     }
 }
 
-void divide() {
+void divide(std::atomic<int>  &shared_variable) {
     for (int i = 0; i < 10; ++i) { // Number of operations
         spin_lock.lock();
         shared_variable =shared_variable / 2;
@@ -46,9 +45,10 @@ void divide() {
     }
 }
 int main(){
+    std::atomic<int> shared_variable(1.0);
     // Create threads
-    std::thread t1(multiply);
-    std::thread t2(divide);
+    std::thread t1(multiply,shared_variable);
+    std::thread t2(divide,shared_variable);
 
     // Start threads
     t1.join();
