@@ -1,13 +1,14 @@
 # Starting up - The init Program
-### PS: This Notes are written from Master Embedded Linux book Chapter 13, it was my notes so it might be not organised well. I only made it for remembering.
+### PS: This Notes are written from Master Embedded Linux book Chapter 13, it was my notes so it might not be organised well. I only made it for remembering.
 
+- Previously with busybox we had to start all of our resources and put it in inittab because we have only one script. What if we divided our system into different run levels and in every level we start some processes and kill others.
 
 - There are many possible implementations of init which are BusyBox init, System V init, Systemd
 
 ### After the kernel has booted 
 1. the kernel bootstrap code seeks to find a root filesystem, either initramfs or a filesystem specified by root= on the kernel command line.
 
-2. then executes a program that, by default, is /init forinitramfs and /sbin/init for a regular filesystem --> ? (I don't know why he mentioned here that for initramfs is /init ad=nd for regular file system is /sbin/init, Meanwhile, at booth I used /sbin/init?)
+2. then executes a program that, by default, is /init for initramfs and /sbin/init for a regular filesystem --> ? (I don't know why he mentioned here that for initramfs is /init ad=nd for regular file system is /sbin/init, Meanwhile, at booth I used /sbin/init?)
 
 ### The init program 
 - has root privilege, and since it is the first process to run, it has a process ID (PID) of 1 . If, for some reason, init cannot be started, the kernel will panic.
@@ -32,14 +33,24 @@
 
 - The BusyBox init deamon is just a trimmed-down version of System V init.Compared to busyBox, system V has two advantages:
 1. It's easier to add new packages at runtime or buildtime due to the well known, modular format of the boot scripts.
-2. It has the concept of the runlevels, which allows a collection of progrems to be started and stopped in one go when switching from one level to another.
+2. It has the concept of the runlevels, which allows a collection of progrems to be started and stopped in one go when switching from one level to another. These modes will reduce CPU load on system.
 - There are eight runlevels, numbered from 0 to 6 , plus S :
 • S : Runs startup tasks
 • 0 : Halts the system
 • 1 to 5 : Available for general use --> 1. Single User , 2. Multi-User without Network, 3.Muli-User with Network, 4.Not Used, 5.Multi-User with Graphical login which we use it. 
 • 6 : Reboots the system  
 
-- The init program starts with default runlevel given in initdefault line in etc/inittab. You can change the level mode by telinit 5, This will change to run level 5
+- The init program starts with default runlevel given in init default line in etc/inittab. You can change the level mode by telinit 5, This will change to run level 5
+
+### How to switch between modes
+- By using init n 
+n: number of required mode
+
+# Usage of system v in Embedded Linux
+- We could have different run modes such as 
+    - Application Mode
+    - Maintenance Mode
+
 ### Runlevels
 - Each runlevel has a number of scripts that stop things, called kill scripts, and another group that starts things, the start scripts.
 - When entering new level --> init first runs kill scripts in the new level and then start scripts of it.
@@ -48,12 +59,14 @@
 - System V is used in both Buildroot and Yocto Project.
 
 ### Inittab
-- The format is an extended version of the BusyBox --> id:runlevels:action:process
+- The format is an extended version of the BusyBox 
+    - id : runlevels : action : process
 The fields are shown here:
 • id : A unique identifier of up to four characters.
 • runlevels : The runlevels for which this entry should be executed. This was left blank in the BusyBox inittab .
 • action : One of the keywords given in the following paragraph.
 • process : The command to run.
+
 - The actions are the same as for BusyBox init : sysinit , respawn , once , wait , restart , ctrlaltdel , and shutdown . However, System V init does not have askfirst , which is specific to BusyBox.
 
 ### The init.d scripts
@@ -68,12 +81,11 @@ ls | grep rc
 ### Add a new deamon
 If I have a deamon script called Simple server such
 ![Deamon_script](./DeamonScript.png)
-start-stop-daemon is a helper function that makes it easier to manipulate background processes such as this. It starts with S and close with k
+- start-stop-daemon is a helper function that makes it easier to manipulate background processes such as this. It starts with S and close with k
 
 - To make it operational--> 
 1. Copy the script to the target directory /etc/init.d/simpleserver & make it executable
-2. Add links from each of the runlevels that you want to run this program from; in this case, only the default
-runlevel of 5.
+2. Add links from each of the runlevels that you want to run this program from; in this case, only the default runlevel of 5.
 ``` bash
 # cd /etc/init.d/rcS.d
 # ln -s ../init.d/simpleserver S99simpleserver
