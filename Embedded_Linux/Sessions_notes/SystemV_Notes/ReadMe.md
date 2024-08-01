@@ -61,7 +61,8 @@ n: number of required mode
 ### Inittab
 - The format is an extended version of the BusyBox 
     - id : runlevels : action : process
-The fields are shown here:
+
+- The fields are shown here:
 • id : A unique identifier of up to four characters.
 • runlevels : The runlevels for which this entry should be executed. This was left blank in the BusyBox inittab .
 • action : One of the keywords given in the following paragraph.
