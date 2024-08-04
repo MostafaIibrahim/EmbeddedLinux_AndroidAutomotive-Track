@@ -94,4 +94,5 @@ If I have a deamon script called Simple server such
 
 - System V init is a simple init daemon that has served Linux admins for decades. It still lack to ability of monitoring services and restert them if needed. Is it the reason of moving most popular distro to Systemd?
 
-
+# Task
+- Make a script that prints Hello and make it as a Service 

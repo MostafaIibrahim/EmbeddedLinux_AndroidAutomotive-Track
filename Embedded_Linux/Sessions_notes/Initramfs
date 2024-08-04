@@ -1,0 +1,124 @@
+# Random Notes about Chapter 5 Rootfile system
+1- First is stage directory 
+``` bash 
+mkdir ~/rootfs
+cd ~/rootfs
+mkdir bin dev etc home lib proc sbin sys tmp usr var
+mkdir usr/bin usr/lib usr/sbin
+mkdir -p var/log
+```
+Watch your tree by tree -d
+
+We will have a problem with permissions 
+2- Change owner of created file to the owner for secuirty issues
+$ sudo chown -R root:root *
+
+#We will use init program provided by busybox
+
+#Libraries for the root filesystem
+Copy all of them from sysroot directory of toolchain 
+
+3-Mounting FS 
+
+# mount -t proc proc /proc
+# mount -t sysfs sysfs /sys
+# mount -t ext4 /dev/mmcblk0p1 /mnt #mount sd card of type ext4
+
+Kernel module ?
+
+--------------------------------------------------------------------------
+Creating a boot initramfs
+
+1- create Stadnalone initramfs
+$ cd ~/rootfs
+$ find . | cpio -H newc -ov --owner root:root >
+../initramfs.cpio  -->?
+$ cd ..
+$ gzip initramfs.cpio
+$ mkimage -A arm -O linux -T ramdisk -d initramfs.cpio.gz
+uRamdisk
+2-Booting initramfs
+- The simplest thing we can do is to run a shell on the console,We can do that by adding rdinit=/bin/sh to the kernel command line.
+we should have initramfs
+
+$ QEMU_AUDIO_DRV=none \
+qemu-system-arm -m 256M -nographic -M versatilepb \
+-kernel zImage
+-append "console=ttyAMA0 rdinit=/bin/sh" \
+-dtb versatile-pb.dtb
+-initrd initramfs.cpio.gz
+
+A refinement to this setup would be to write a shell script that mounts proc , and anything else that needs to be done at bootup. Then, you could run this script instead of /bin/sh at boot.
+
+#!/bin/sh
+/bin/mount -t proc proc /proc
+# Other boot-time commands go here
+/bin/sh
+
+---------------------------------------------
+Instead of running shell program we will need init program cuz it's more flexible. Unix sys call init in the start up The init program begins by reading the configuration file, /etc/inittab .
+::sysinit:/etc/init.d/rcS
+::askfirst:-/bin/ash
+-The first line runs a shell script, rcS , when init is started. 
+-The second line prints the message Please press Enter to activate this console to the console and starts a shell when you press Enter
+
+BusyBox init provides a default inittab if none is present in the root filesystem. It is a little more extensive than the preceding one.
+
+The script called /etc/init.d/rcS is the place to put initialization commands that need to be performed at boot, for example, mounting the proc and sysfs filesystems:
+``` bash
+#!/bin/sh
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+```
+Make sure that you make rcS executable like this:
+$ cd ~/rootfs
+$ chmod +x etc/init.d/rcS
+
+You can try init out on QEMU by changing the -append parameter like this:
+-append "console=ttyAMA0 rdinit=/sbin/init"
+
+---------------------------------------------------------------------------
+To boot using NFS 
+
+1- install and configure an NFS server on your host
+$ sudo apt install nfs-kernel-server\
+
+NFSD server needs to be told which directories are being exported to the network;
+
+this is controlled by /etc/exports .
+
+to export the root filesystem on my host, I have this:
+/home/chris/rootfs *(rw,sync,no_subtree_check,no_root_squash)
+
+
+
+your kernel has to be configured with CONFIG_ROOT_NFS . Then, you can configure Linux to do the mount at boot time by adding the following to the kernel commandline: root=/dev/nfs rw nfsroot=<host-ip>:<root-dir> ip=<target-ip>
+nfsroot : This specifies the IP address of the host, followed by the path to the
+exported root filesystem
+ip : This is the IP address to be assigned to the target.
+
+
+script to test on Qemu
+
+#!/bin/bash
+KERNEL=zImage
+DTB=versatile-pb.dtb
+ROOTDIR=/home/chris/rootfs
+HOST_IP=192.168.1.1
+TARGET_IP=192.168.1.101
+NET_NUMBER=192.168.1.0
+NET_MASK=255.255.255.0
+sudo
+sudo
+sudo
+sudo
+tunctl -u $(whoami) -t tap0
+ifconfig tap0 ${HOST_IP}
+route add -net ${NET_NUMBER} netmask ${NET_MASK} dev tap0
+sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+QEMU_AUDIO_DRV=none \
+qemu-system-arm -m 256M -nographic -M versatilepb -kernel
+${KERNEL} -append "console=ttyAMA0,115200 root=/dev/nfs rw
+nfsroot=${HOST_IP}:${ROOTDIR} ip=${TARGET_IP}" -dtb ${DTB} -net
+nic -net tap,ifname=tap0,script=no
+
