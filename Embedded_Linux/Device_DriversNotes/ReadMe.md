@@ -10,6 +10,18 @@
     1. Character --> This is unbuffered I/O -such as serial port- data is sent one byte at a time over a communication channel which means data transferred directly without any buffering and It is the first choice when implementing custom device drivers..
     2. Block --> This is for mass storage items
     3. Network --> This is like Block but for transmitting and receiving networks 
+--------------------------------------------------------------------------------------------------------------------------
+ً
+# Types of Modules
+- Static Module --> Is to load Module during compilation and it's part of zImage
+- Dynamic Module --> During Run time and it's a file with extension .ko
+
+So if we loaded it Statically it will make ---> 1. zImage is much more larger 
+                                                2. Startup of the kernel will be slower due to loading larger zImage
+### We can Improve startup of kernel time by laoding our Modules Dynamically, and Using init process idea such as systemV 
+
+- Dynamic Module file is larger than Static module 
+--> Because it has exit section which make it larger
 
 # Let's talk about Character Device driver and how it works
 
@@ -41,26 +53,24 @@ The minor number --> Tells device driver which interface is being accessed
 - the kernel checks whether the major and minor numbers fall into a range registered by a character device driver. If so, it passes the call to the driver; otherwise, the open call fails. The device driver can extract the minor number to find out which hardware interface to use.
 
 # The Anatomy of device driver 
-- Let's Create a device driver called dummy--> This creates 4 devices that can be accessed by /dev/dummy0 to /dev/dummy3
+- We write it with LKM Sytnax
+### LKM: Linux Kernel Module
+This is the way we werite code to kernel and we use it to extend Linux functionality --> زى انى استخدمها عشان اظبط security او اني ازود kernel stackاو تزود حاجة فى الفايل سيستم 
+- اللينكس بيدينا اسامي الفانكشن اللى هنستخدمها او البروتوتايب و مبنكريتش حاجه من دماغنا لكن احنا هنسختدم حاجات جاهزة و بنشوف بنستخدمها ازاى بس.
+- Device drivers doesn't has main function because kernel has his own main we only creat Init and deinit function and puth them at Macro function provided by kernel.
 
 1. Include Headers 
 ``` C
 #include<linux/kernel.h>
-#include<linux/module.h>
-#include<linux/init.h>
-#include<linux/fs.h>
-#include<linux/device.h>
 ```
-2. We will define Major, Minor Numbers which was explained before, and device Name
-``` C
-#define DEVICE_NAME "dummy"
-#define MAJOR_NUM 42
-#define NUM_DEVICES 4
-```
-- static struct class *dummy_class; --> we will find why was it created 
-3. We will define four dummy function for charcter device driver interface --> dummy_open(), dummy_release(), dummy_read(), dummy_write().
+- Kernel Header has source code of kernel which provide prototypes of functions. We use command (uname -r) to tell us version of our kernel to use this version --> This is an Important.
+- Don't Include User Space Headers because this headers only provide system call to call with kernel and we already in Kernel Space 
 
-4. We need to initialize a file_operations structure and define the dummy_init() and dummy_exit() functions, which are called when the driver is loaded and unloaded cuz it's dynamic module.
+- static struct class *dummy_class; --> we will find why was it created 
+2. We will define four dummy function for charcter device driver interface --> dummy_open(), dummy_release(), dummy_read(), dummy_write().
+
+
+4. We need to initialize a file_operations structure and define the dummy_init() and dummy_exit() functions, which are called when the driver is loaded and unloaded cuz it's dynamic module.even if it was static --> we include Deinit too, to tell kernel we won't use it.
  1. Create file_operation called dummy_fops which is an instance of type struct file_operations that has owner of the file and assign all function interfaces 
  ``` c
  struct file_operations dummy_fops = {
@@ -109,13 +119,14 @@ printk("Dummy unloaded\n");
 module_init(dummy_init);
 module_exit(dummy_exit);
 ```
+These Macro like functions are provided by kernel to know our Init and deinit functions
 6. The closing three macros named MODULE_* add some basic information about the module:
 ``` c
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Chris Simmonds");
 MODULE_DESCRIPTION("A dummy driver");
 ```
-
+## Don't Forget if u use VS code to configure Json file with our kernel version Path to be able to find Headers.
 - This illustrate how the linkage between a device node and driver code works; how the device class is created, allowing a device manager to create device nodes automatically when the driver is loaded; and how the data is moved between the user and kernel spaces.
 
 # Compiling Kernel Module 
