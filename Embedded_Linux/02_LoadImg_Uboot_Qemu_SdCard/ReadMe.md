@@ -1,35 +1,39 @@
 # Load Image from Virtual SD Card
-- We will Create virtual SD card 
+### What have we done so far!?
+- Let's first summarize what we have done to make our image run properly without a customization tool. We first created our cross-compiler using the tool Crosstool-NG, and then we created our target bootloader, which was U-Boot.
+- Now after cloning our kernel and having zImage we want to boot using our kernel Image through Virtual SD Card
+
+1. We will Create virtual SD card 
 ``` bash
 touch sd.img
 ```
-- Write zeros to this file of size = 1M
+2. Write zeros to this file of size = 1M
 ``` bash 
 dd if=/dev/zero of=sd.img bs=1M count=1024
 ``` 
 ![Write_to_File](./Source_Img.png)
-- Drivide it into partitions --> FAT16 (Primary - Loadable) = 200 MB , ext4 = 500 MB
+3. Drivide it into partitions --> FAT16 (Primary - Loadable) = 200 MB , ext4 = 500 MB
 ``` bash
 cfdisk sd.img
 ```
-- This will open a GUI so we will chose dos type
+4. This will open a GUI so we will chose dos type
 
 ![Divide_partitions](./ss.png)
 
-- Then we will attach it with loop to be mapped as block device by running next code 
+5. Then we will attach it with loop to be mapped as block device by running next code 
 ```bash
 sudo losetup -f --show --partscan sd.img
 ```
-- You can show ur sd Card loop by running 
+6. You can show ur sd Card loop by running 
 ```bash 
 losetup -a | grep loop5
 ```
-- Then we Format the boot and rootfs partition to be Fat16 and ext4 
+7. Then we Format the boot and rootfs partition to be Fat16 and ext4 
 ``` bash
 sudo mkfs.vfat -F 16 -n boot /dev/loop5p1
 sudo mkfs.ext4 -l rootfs /dev/loop5p2
 ```
-- Last step in SD card is to mount it 
+8. Last step in SD card is to mount it 
 ``` bash 
 cd ~
 mkdir boot 
@@ -39,11 +43,11 @@ $ sudo mount ${DISK}p2 ~/rootfs
 ```
 # Write the Script
 ![writing_script](./script.png)
-- put Files into Boot folders and create zImage of the script
+9. put Files into Boot folders and create zImage of the script
 ![Creating_zImage](./Screenshot%20from%202024-07-22%2011-50-29.png)
 # Booting from SD-Card
 
-- Go to u-boot directory and Run Qemu attaching path of sd card
+10. Go to u-boot directory and Run Qemu attaching path of sd card
 ```bash 
 qemu-system-arm -M vexpress-a9 -nographic -kernel ./u-boot  -sd /home/mostafam722/sd.img 
 ```

@@ -1,4 +1,10 @@
 # Booting on Root files system from Sd Card
+### what have we done so far!! 
+- Let's first summarize what we have done to make our image run properly without using a customization tool. 
+- We started by creating our cross-compiler using the Crosstool-NG tool. Next, we created our target bootloader, which is U-Boot. 
+- We then created our target kernel image, which the bootloader will load either via SD card flash memory or through a network communication protocol, such as TFTP. 
+- Now, we have the kernel image and the bootloader, but we are missing one crucial component: the root filesystem (rootfs). We will use sd Card to boot into Ramfile system.
+------------------------------------------------------------------------------------------------
 ### Task
 1. BOOT INTO RAMFS
 2. mount devtmpfs , procfs ,sysfs
@@ -51,7 +57,7 @@ sudo chown -R root:root ~/rootfs
 8. Let's repeat assiging loops to sd card
 
 ### OK! If you followed my steps you will find a surprise!!!
-- After mounting rootfs everything will be lost so, We should do that, we should do it on a host file then create rootfs which will be mounted
+- After mounting rootfs everything will be lost so, We shouldn't do that, we should do it on a host file then create rootfs which will be mounted
 
 ### Repeat all steps again
 9. Now Let's move zImage and dtb to boot 
