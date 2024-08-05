@@ -1,0 +1,1 @@
+cmd_/home/mostafa/Desktop/ITI_Docs/AdminLinux_Lab/Embedded-LinuxI/Embedded_Linux/Yocto_Notes/Dummy_Driver/driver.mod := { echo  /home/mostafa/Desktop/ITI_Docs/AdminLinux_Lab/Embedded-LinuxI/Embedded_Linux/Yocto_Notes/Dummy_Driver/driver.o;  echo; } > /home/mostafa/Desktop/ITI_Docs/AdminLinux_Lab/Embedded-LinuxI/Embedded_Linux/Yocto_Notes/Dummy_Driver/driver.mod
