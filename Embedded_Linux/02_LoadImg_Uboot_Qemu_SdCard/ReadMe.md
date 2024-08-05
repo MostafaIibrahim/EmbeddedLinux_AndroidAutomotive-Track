@@ -1,4 +1,4 @@
-# Load Image from SD Virtual Card
+# Load Image from Virtual SD Card
 - We will Create virtual SD card 
 ``` bash
 touch sd.img
