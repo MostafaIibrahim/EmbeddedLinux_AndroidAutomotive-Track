@@ -1,4 +1,4 @@
-# Task2 --> Booting from Sd Card
+# Booting from Sd Card
 
 ```bash 
 cd ~/rootfs
