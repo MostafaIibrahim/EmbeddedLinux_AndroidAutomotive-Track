@@ -72,3 +72,4 @@ bootz ${kernel_addr_r} - ${fdt_addr_r}
 ```
 ![boot_kernel_sd](./bootkernelsd.png)
 
+### This is great! Next task, we will try doing it through initramfs.
