@@ -52,4 +52,4 @@ $ bitbake-layers add-layer ../../meta-Miti
 ```bash
 $ bitbake myrecipe
 ```
-
+![Result](REsult.png)
