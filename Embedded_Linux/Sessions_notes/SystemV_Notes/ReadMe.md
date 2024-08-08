@@ -1,4 +1,27 @@
 # Starting up - The init Program
+
+## This is a summary of SystemV and this summary ws abstracted from the provided reference Link below
+
+- So SystemV is an Init process such as the one in Busybox, And this init process is called by kernel as the first process to run after the kernel transfer control.
+- SystemV init at the begenning call /sbin/init ----> this progrem parse the inittab file (such like busybox), At inittab file it executes the first action which is 
+```bash 
+::S::sysinit::rcS
+```
+- So inittab go and parse this file, mount directories, and call default run level -init 5-, Then it goes back to inittab and run rc.c file while having the specified run Level.
+
+- rc.c is responsible of switching on runlevels -case 5- then enter the directory of rc5.d and loop over files inside this directory with S and k, and parse this files Symbolic linked to files inside init.d (ex: K01network --> k:kill , 01:priority,network:filename) (/etc/init.d network) , it abstracts k or s and execute it based on priority and go to filename to send k/S as argument.
+
+- inside init.d there are our scripts which invoke the binary of any process that will start.
+
+- SystemV is built on run levels.
+
+- How to write script to run on specific run level?
+1. Create app and compile it then put the binary inside /bin
+2. inside init.d write your Script that will invoke the binary of the app
+3. Go to the folder of the required run level and make symbolic link to all scripts inside init.d and make your app like it (S08dummyapp)
+
+
+------------------------------------------------------------------------------------------------
 ### PS: This Notes are written from Master Embedded Linux book Chapter 13, it was my notes so it might not be organised well. I only made it for remembering.
 
 - Previously with busybox we had to start all of our resources and put it in inittab because we have only one script. What if we divided our system into different run levels and in every level we start some processes and kill others.
@@ -96,3 +119,7 @@ If I have a deamon script called Simple server such
 
 # Task
 - Make a script that prints Hello and make it as a Service 
+
+# Reference
+- 
+

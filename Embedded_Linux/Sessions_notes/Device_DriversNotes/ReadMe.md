@@ -169,3 +169,17 @@ LINUXDIR --> Directory of target device that will run module on.
 - We use sodo with it.
 
 ### Device Driver has a job of handling devices and representing them to user space.
+
+
+
+------------------------------------------------------------------------------------------------
+# Device Driver Fady Lec 
+
+- LKM (Linux Kernel Modules): The way we use to write Linux kernel
+- Linux kernel --> Handle Tasks , Interfacing during runtime
+- How can I interface with kernel or inject module inside it?
+1. Static --> Inject module during linux compilation
+2. Dynamic --> Inject module during Linux run time
+### Before What is Module?
+- We could consider it for now as a driver but in general it could be file system driver or something, it shouldn't write something on Hardware but we could conisder it as a driver.
+

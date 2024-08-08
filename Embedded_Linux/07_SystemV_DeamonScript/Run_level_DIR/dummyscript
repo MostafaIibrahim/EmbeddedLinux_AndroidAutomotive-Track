@@ -1,0 +1,18 @@
+#!/bin/sh
+
+echo "Hey from DummyApp Script"
+
+case "$1" in 
+	start)
+		echo "Startting dummyApp......."
+		start-stop-daemon -S -n dummyapp -a /bin/dummyapp &
+		;;
+	stop)
+		echo "Stopping dummyApp........"
+		start-stop-daemon -K -n dummyapp
+		;;
+	*)
+		echo "Usage: $0 {start|stop}"
+		exit 1
+esac
+exit 0
