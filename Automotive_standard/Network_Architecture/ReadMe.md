@@ -27,10 +27,11 @@ ex:CAN - LIN - Ethernet --> Data - Physical layer
 
 - So to call google.com --> (https) go and call TCP then (TCP) call IPv4, so (IPv4) call (Ethernet). 
 - MAC Address is unique for my Device
------------------------------------------------------------------------
+
+|                     |      |            |              |            |
 |   Ethernet Protocol | IPv4 | UDP header | https header | https data |
 |                     |      |            |              |            |
------------------------------------------------------------------------
+
                       |         This is the Payload of Ethernet       |
                       -------------------------------------------------
                              | This is the Payload of IPv4            |
@@ -59,6 +60,8 @@ ex:CAN - LIN - Ethernet --> Data - Physical layer
 
 ### Let's Start with Physical layer in Depth
 
+- Ethernet is peer to peer, Full Duplex, Just 2 Nodes connected to each other
+
 - We have 2 Mc such as RPI microcontroler So in our Phyical layer ther are some components:
 1. Ethernet Caple    
 2. Phy --> Which is the Socket that I enter Ethernet capble in. such as RG405
@@ -75,4 +78,64 @@ ex:CAN - LIN - Ethernet --> Data - Physical layer
 1. PCS --> Physical coding sublayer and it's responsible of coding and decoding of data such as (3B2), It's in side of MAC
 2. PMA --> Physical Meduim Attachment, It's responsible of Identifying the data that I received.
             So it cancel the echo so we said that we can send and receive at same time at the same two wires, By recieving the full package of data the I sent and received then I cancel from this data, the one I have sent --> That's How I know the what's the received data
-    
+- So to connect both PHY should be up and it's happen when connecting tw PHYs nby Ethernet Caple, a checking mechanism happens and it's HW mechanism called link training.
+
+
+------------------------------------------------------------------------------------------------
+
+### Data Link Layer
+
+- Data Link Layer is responsible of Framing, Error detection and correction, Flow control and Access control
+- It's divided into two sub layers:
+1. LLC (Logical Link Control)
+2. MAC (Media Access Control)
+- LLC is responsible of Framing and Error detection and correction
+- MAC is responsible of Flow control and Access control
+- MAC is responsible of Framing and Error detection and correction
+- MAC is responsible of Flow control and Access control
+
+-------------------------------------------
+# Ethernet is node to node 
+-------------------------------------------
+- So in Ethernet we have 2 MACs, one in each node
+# What is the device that solve this limitation?
+- Ethernet Switch
+- It's a device that connect multiple nodes together
+- It's a bridge between multiple nodes
+- It's a device that solve the limitation of Ethernet being node to node
+
+- VLAN 
+- It's a way to divide a network into multiple virtual networks
+- It's a way to isolate traffic between different virtual networks
+- It's a way to improve network security ,and performence
+
+- VLAN + Ethernet switch
+
+- What is TCAM 
+- It's a type of memory that is used in Ethernet switches
+- it's Filtering types of protocols so if we have anything of IPv4 I tell specific node to drop it.
+
+- What is the difference between Router and Switch?
+- Router is a device that connect multiple networks together
+- Switch is a device that connect multiple nodes together
+
+### How switch when receives a message, How does switch now destination MAC?
+- Switch has a table called CAM (Content Addressable Memory)
+- CAM is a table that contains the MAC address of each node connected to the switch
+- When switch receives a message, it checks the destination MAC address in the CAM table
+
+What if the CAM table is empty?
+- Switch will flood the message to all nodes connected to it This is called broadcast
+- Broadcast is a type of message that is sent to all nodes connected to a switch
+- Broadcast is used to discover the MAC address of a node and used to discover the IP address of a node
+
+### Switch Autolearn feature
+- Autolearn is a feature that allows a switch to learn the MAC address of a node automatically
+
+or 
+
+### predefine Manually in CAM table
+- CAM table can be predefine manually by the network administrator
+- This is called static CAM table
+
+
