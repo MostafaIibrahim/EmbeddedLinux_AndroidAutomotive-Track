@@ -138,4 +138,4 @@ or
 - CAM table can be predefine manually by the network administrator
 - This is called static CAM table
 
-
+![alt text](Untitled.jpeg)
