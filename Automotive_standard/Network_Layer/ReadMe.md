@@ -98,10 +98,19 @@
  - TCP uses a timeout to determine when a packet has not been delivered
  ![alt text](image-1.png)
 
- 
+* Three way handshake connection
+- SYN (synchronize) packet is sent from the client to the server
+- SYN-ACK (synchronize-acknowledgement) packet is sent from the server to the
+- ACK (acknowledgement) packet is sent from the client to the server
+
+
+
 ![alt text](image.png)
 
 - Sync flag
+What is Sync flag
+- The SYN flag is used to establish a connection between devices, synchronize the sequence numbers of the devices, and initiate the three-way handshake
+
 - Acknowledgment flag
 - PSH flag
 - RST flag
@@ -109,4 +118,6 @@
 - ECE flag
 - CWR flag
 - NS flag
+
+
 
