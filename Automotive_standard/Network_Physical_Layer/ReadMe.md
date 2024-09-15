@@ -77,7 +77,7 @@ ex:CAN - LIN - Ethernet --> Data - Physical layer
 - PHY has Layers:
 1. PCS --> Physical coding sublayer and it's responsible of coding and decoding of data such as (3B2), It's in side of MAC
 2. PMA --> Physical Meduim Attachment, It's responsible of Identifying the data that I received.
-            So it cancel the echo so we said that we can send and receive at same time at the same two wires, By recieving the full package of data the I sent and received then I cancel from this data, the one I have sent --> That's How I know the what's the received data
+            So it cancel the echo so we said that we can **send and receive at same time** at the same two wires, By recieving the full package of data the I sent and received then I cancel from this data, the one I have sent --> That's How I know the what's the received data
 - So to connect both PHY should be up and it's happen when connecting tw PHYs nby Ethernet Caple, a checking mechanism happens and it's HW mechanism called link training.
 
 
@@ -98,26 +98,43 @@ ex:CAN - LIN - Ethernet --> Data - Physical layer
 # Ethernet is node to node 
 -------------------------------------------
 - So in Ethernet we have 2 MACs, one in each node
+
+- Ethernet untagged frame
+- Ethernet tagged frame
+
+- Ethernet tagged frame is used in VLAN (Virtual LAN)
+- VLAN is used to divide the network into multiple virtual network
+
+- What is the frame of both ?
+  1.  Ethernet untagged frame
+    - Destination MAC
+    - Source MAC
+    - Ethertype (2-Byte)
+    - Payload
+
+  2. Ethernet tagged frame
+    - Destination MAC
+    - Source MAC
+    - VLAN tag (4-byte)
+    - Ethertype (2-byte)
+    - Payload
+
+
 # What is the device that solve this limitation?
 - Ethernet Switch
-- It's a device that connect multiple nodes together
-- It's a bridge between multiple nodes
-- It's a device that solve the limitation of Ethernet being node to node
+  - It's a device that connect multiple nodes together, a bridge between multiple nodes
+  - It's a device that solve the limitation of Ethernet being node to node
 
 - VLAN 
-- It's a way to divide a network into multiple virtual networks
-- It's a way to isolate traffic between different virtual networks
-- It's a way to improve network security ,and performence
+  - It's a way to divide a network into multiple virtual networks, it isolates traffic between different virtual networks and improve network security ,and performence
 
 - VLAN + Ethernet switch
 
-- What is TCAM 
-- It's a type of memory that is used in Ethernet switches
-- it's Filtering types of protocols so if we have anything of IPv4 I tell specific node to drop it.
+- What is TCAM --> It's a type of memory that is used in Ethernet switches, it's Filtering types of protocols so if we have anything of IPv4 I tell specific node to drop it.
 
 - What is the difference between Router and Switch?
-- Router is a device that connect multiple networks together
-- Switch is a device that connect multiple nodes together
+  - Router is a device that connect multiple networks together
+  - Switch is a device that connect multiple nodes together
 
 ### How switch when receives a message, How does switch now destination MAC?
 - Switch has a table called CAM (Content Addressable Memory)
@@ -125,7 +142,7 @@ ex:CAN - LIN - Ethernet --> Data - Physical layer
 - When switch receives a message, it checks the destination MAC address in the CAM table
 
 What if the CAM table is empty?
-- Switch will flood the message to all nodes connected to it This is called broadcast
+- Switch will flood the message to all nodes connected to it This is called broadcast and wait for MAC address owner to respond then add in the table MAC address and it's port then send directly.
 - Broadcast is a type of message that is sent to all nodes connected to a switch
 - Broadcast is used to discover the MAC address of a node and used to discover the IP address of a node
 
@@ -139,3 +156,23 @@ or
 - This is called static CAM table
 
 ![alt text](Untitled.jpeg)
+
+- Unicast : Unicast is a type of message that is sent to a single node
+- Broadcast : Broadcast is a type of message that is sent to all nodes connected to a switch
+- Multicast : Multicast is a type of message that is sent to a group of nodes
+- Anycast
+
+* Multicast one to n  
+* Unicast --> one to one
+* Broadcast --> one to all
+
+### What is the difference between Multicast and VLAN tagged frame?
+- Multicast is a type of message that is sent to a group of nodes and it's untagged frame and predefined inside the switch that if this MAC address sent is the SRC so send it to multiple nodes
+- Tagged frame is a type of frame that is used in VLAN to identify the VLAN ID, allow multiple VLANs to be transmitted over a single link, and improve network security and performance
+
+## nested switches
+- Nested switches are switches that are connected to each other
+- Nested switches are used to improve network security and performance
+- Nested switches are used to connect multiple networks together
+
+* Time Syncing, such as PTP (Precision Time Protocol) used for synchronising
